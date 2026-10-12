@@ -1,0 +1,50 @@
+
+=> CREATE TABLE IF NOT EXISTS conditions (
+CREATE TABLE
+
+=> INSERT INTO conditions (time, location, device, temperature, humidity)
+INSERT 0 3
+
+=> INSERT INTO conditions (time, location, device, temperature, humidity)
+INSERT 0 59943
+
+=> SELECT * FROM conditions ORDER BY time DESC LIMIT 5;
+time | location | device | temperature | humidity
+2026-10-12 12:21:07.221038+00:00 | office | sensor-1 | 22.2 | 45.1
+2026-10-12 11:21:07.221038+00:00 | office | sensor-1 | 22.3 | 44.8
+2026-10-12 10:21:07.221038+00:00 | office | sensor-1 | 22.1 | 45.0
+2026-10-12 09:21:07.468640+00:00 | office | sensor-office | 23.32032839528839 | 48.74974320343396
+2026-10-12 09:21:07.468640+00:00 | lab | sensor-lab | 22.627482456857802 | 48.550046427746906
+
+=> SELECT hypertable_name, num_chunks, num_dimensions FROM timescaledb_information.hypertables;
+hypertable_name | num_chunks | num_dimensions
+conditions | 3 | 1
+
+=> SELECT count(*) AS rows, min(time), max(time) FROM conditions;
+rows | min | max
+59946 | 2026-09-28 12:21:07.468640+00:00 | 2026-10-12 12:21:07.221038+00:00
+
+=> SELECT chunk_name, range_start, range_end FROM timescaledb_information.chunks WHERE hypertable_name = 'conditi
+chunk_name | range_start | range_end
+_hyper_1_2_chunk | 2026-09-24 00:00:00+00:00 | 2026-10-01 00:00:00+00:00
+_hyper_1_3_chunk | 2026-10-01 00:00:00+00:00 | 2026-10-08 00:00:00+00:00
+_hyper_1_1_chunk | 2026-10-08 00:00:00+00:00 | 2026-10-15 00:00:00+00:00
+
+=> EXPLAIN (ANALYZE, COSTS OFF, TIMING OFF, SUMMARY OFF) SELECT avg(temperature) FROM conditions WHERE time > NOW
+QUERY PLAN
+Aggregate (actual rows=1.00 loops=1)
+  Buffers: shared hit=52
+  ->  Custom Scan (ChunkAppend) on c
+        Chunks excluded during start
+        Buffers: shared hit=52
+        ->  Bitmap Heap Scan on _hyp
+              Recheck Cond: ("time" 
+              Heap Blocks: exact=39
+              Buffers: shared hit=52
+              ->  Bitmap Index Scan 
+                    Index Cond: ("ti
+                    Index Searches: 
+                    Buffers: shared 
+Planning:
+  Buffers: shared hit=46
+Allocated Memory: allocated_by_plan=

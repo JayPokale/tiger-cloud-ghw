@@ -1,0 +1,34 @@
+✗ View Skill (MCP: tiger) · skill_name: "schema-exploration", path: ""
+  └ MCP server 'tiger': McpError: MCP error 0: remote tool call failed: calling "tools/call":
+    sending "tools/call": Bad Request
+
+● List Database Services (MCP: tiger)
+  └ {"services":[{"created":"2026-10-12T12:20:30Z","environment":"DEV","id":"swq1...
+
+● Show Database Schema (MCP: tiger) · service_id: "swq10x6888", schema: "public", definitions: t… 5s
+  └ {"schema":"DATABASE: hacktoberfest-ghw (swq10x6888)\n\nSCHEMA: public\n\nTABL...
+
+✗ Execute SQL Query (MCP: tiger) · SELECT bucket, open, high, low, close FROM public.crypto_candles…
+  └ MCP server 'tiger': failed to connect to database: failed to connect to `user=readonly
+    database=tsdb`: 54.175.162.202:30662 (swq10x6888.ep75m07gjn.tsdb.cloud.timescale.com): failed
+    SASL auth: FATAL: password authentication failed for user "readonly" (SQLSTATE 28P01)
+
+● Execute SQL Query (MCP: tiger) · SELECT bucket, open, high, low, close FROM public.crypto_candles…
+  └ {"execution_time":"246.55659ms","result_sets":[{"columns":[{"name":"bucket","...
+
+**Service:** `swq10x6888` (`hacktoberfest-ghw`, READY)
+
+| UTC bucket | Open | High | Low | Close |
+|---|---:|---:|---:|---:|
+| 2026-10-12 13:11 | 82599.21 | 82599.21 | 82599.21 | 82599.21 |
+| 2026-10-12 12:22 | 83113.56 | 83116.73 | 83040.49 | 83073.16 |
+| 2026-10-12 12:21 | 83066.10 | 83120.00 | 83066.10 | 83115.21 |
+
+Only 3 BTC/USD candles were available.
+
+
+
+Changes    +0 -0
+AI Credits 0.61 (37s)
+Tokens     ↑ 154.9k (143.9k cached, 11.0k written) • ↓ 919 (503 reasoning)
+Resume     copilot --resume=6a738530-b587-4e6c-bdb0-e40ea50dd8ab

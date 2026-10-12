@@ -1,0 +1,9 @@
+
+=> CREATE TABLE IF NOT EXISTS crypto_ticks (
+CREATE TABLE
+
+=> CREATE TABLE IF NOT EXISTS crypto_assets (
+CREATE TABLE
+
+=> INSERT INTO crypto_assets (symbol, name) VALUES
+INSERT 0 3

@@ -1,0 +1,2 @@
+raw hypertable         rows=1005  median execution 21.42 ms
+continuous aggregate   rows=1005  median execution 0.12 ms

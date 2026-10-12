@@ -1,0 +1,26 @@
+Fetching 5 files:  20%|██        | 1/5 [00:00<00:01,  3.34it/s]Fetching 5 files:  60%|██████    | 3/5 [00:00<00:00,  7.79it/s]Fetching 5 files: 100%|██████████| 5/5 [00:03<00:00,  1.17it/s]Fetching 5 files: 100%|██████████| 5/5 [00:03<00:00,  1.42it/s]
+loaded 484 stories; vector index: USING diskann (embedding vector_cosine_ops)
+hn_stories: 484 rows from 2026-09-12 to 2026-10-12
+
+Q: 'making Postgres faster for time-series data' (all time)
+   2026-09-17    7 pts sim=0.759 Tin: full-text search for Postgres
+   2026-09-15    6 pts sim=0.734 PostgreSQL Migrator 1.0: Moving Fast from Oracle and MySQL to PostgreSQL
+   2026-09-16   15 pts sim=0.775 Tin: A Text INdex for Postgres
+   2026-09-16  702 pts sim=0.764 Training a 4B model to produce 81% faster query plans than Postgres
+   2026-09-13   16 pts sim=0.726 DuckDB 2.0 Pushes Whole Queries Through ADBC–10–11× Faster on PostgreSQL
+
+Q: 'making Postgres faster for time-series data' (last 7 days, >= 20 points)
+   2026-10-11   74 pts sim=0.585 Open-source Microsoft Excel, PowerPoint, and Word replications
+   2026-10-06  242 pts sim=0.577 Penguin Mail – open-source Rust email client for Linux with AI
+   2026-10-06  347 pts sim=0.574 OpenTPU – An open-source AI accelerator, developed by AI
+   2026-10-06   52 pts sim=0.573 Show HN: Durable Actors – OSS Durable Objects with configurable compute
+   2026-10-11   32 pts sim=0.558 Show HN: BraiNOTES, handwritten notes on your lecture PDFs in a browser tab
+
+Q: 'open-weight AI models you can run locally' (last 14 days, >= 10 points)
+   2026-10-06  347 pts sim=0.834 OpenTPU – An open-source AI accelerator, developed by AI
+   2026-10-02  170 pts sim=0.791 Show HN: Made an open-source Lego AI generator
+   2026-10-07   66 pts sim=0.785 Show HN: NanoMuse – An open-source AI agent for your phone and computer
+   2026-09-28   25 pts sim=0.776 Show HN: OpenAPPA – open-source deterministic guardrails that don't break agents
+   2026-10-08   47 pts sim=0.758 Show HN: Free open source Adobe Lightroom alternative, completely local with AI
+
+plan: ->  Index Scan using _hyper_6_8_chunk_hn_stories_embedding_idx on _hyper_6_8_chunk  (cost=2.12..76.36 rows=1624 width=40) / ->  Index Scan using _hyper_6_9_chunk_hn_stories_embedding_idx on _hyper_6_9_chunk  (cost=2.12..73.80 rows=1568 width=40) / ->  Index Scan using _hyper_6_10_chunk_hn_stories_embedding_idx on _hyper_6_10_chunk  (cost=2.06..37.90 rows=784 width=40) / ->  Index Scan using _hyper_6_11_chunk_hn_stories_embedding_idx on _hyper_6_11_chunk  (cost=2.05..35.33 rows=728 width=40) / ->  Index Scan using _hyper_6_12_chunk_hn_stories_embedding_idx on _hyper_6_12_chunk  (cost=2.16..99.44 rows=2128 width=40)

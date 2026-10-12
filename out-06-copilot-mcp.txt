@@ -1,0 +1,13 @@
+**Service:** `swq10x6888` (`hacktoberfest-ghw`)
+
+| Hypertable | Rows |
+|---|---:|
+| conditions | 59,946 |
+| crypto_ticks | 1,500 |
+| hn_stories | 484 |
+| sensor_data | 1,156 |
+
+**Latest prices in `crypto_ticks`:** BTC/USD **$82,579.89**; ETH/USD **$2,527.38** (latest timestamps on 2026-10-12).
+
+**Improvement:** Add a composite index on `(symbol, time DESC)` to optimize per-symbol latest-price queries, following Tiger’s hypertable indexing guidance.
+

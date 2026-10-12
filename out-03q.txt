@@ -1,0 +1,53 @@
+
+=> SELECT view_name, materialized_only FROM timescaledb_information.continuous_aggregates;
+view_name | materialized_only
+conditions_hourly | True
+crypto_candles_1m | True
+
+=> SELECT j.job_id, j.application_name, j.schedule_interval FROM timescaledb_information.jobs j WHERE j.proc_name
+job_id | application_name | schedule_interval
+1004 | Refresh Continuous Aggregate Policy  | 0:30:00
+1005 | Refresh Continuous Aggregate Policy  | 0:01:00
+
+=> EXPLAIN (ANALYZE, COSTS OFF, SUMMARY ON) SELECT time_bucket('1 hour', time) AS bucket, location, avg(temperatu
+QUERY PLAN
+Finalize HashAggregate (actual time=
+  Group Key: (time_bucket('01:00:00'
+  Batches: 1  Memory Usage: 529kB
+  Buffers: shared hit=561
+  ->  Append (actual time=6.498..21.
+        Buffers: shared hit=561
+        ->  Partial HashAggregate (a
+              Group Key: time_bucket
+              Batches: 1  Memory Usa
+              Buffers: shared hit=17
+              ->  Seq Scan on _hyper
+                    Buffers: shared 
+        ->  Partial HashAggregate (a
+              Group Key: time_bucket
+              Batches: 1  Memory Usa
+              Buffers: shared hit=10
+              ->  Seq Scan on _hyper
+                    Buffers: shared 
+        ->  Partial HashAggregate (a
+              Group Key: time_bucket
+... (29 rows)
+
+=> EXPLAIN (ANALYZE, COSTS OFF, SUMMARY ON) SELECT * FROM conditions_hourly;
+QUERY PLAN
+Seq Scan on _hyper_4_6_chunk (actual
+  Buffers: shared hit=11
+Planning:
+  Buffers: shared hit=151
+Planning Time: 0.384 ms
+Execution Time: 0.130 ms
+Allocated Memory: allocated_by_plan=
+
+=> SELECT bucket, location, round(avg_temp::numeric,2) AS avg_temp, round(min_temp::numeric,2) AS min_temp, round
+bucket | location | avg_temp | min_temp | max_temp | readings
+2026-10-12 12:00:00+00:00 | office | 22.20 | 22.20 | 22.20 | 1
+2026-10-12 11:00:00+00:00 | office | 22.30 | 22.30 | 22.30 | 1
+2026-10-12 10:00:00+00:00 | office | 22.10 | 22.10 | 22.10 | 1
+2026-10-12 09:00:00+00:00 | lab | 23.25 | 22.63 | 23.64 | 22
+2026-10-12 09:00:00+00:00 | office | 23.35 | 22.77 | 23.76 | 22
+2026-10-12 09:00:00+00:00 | server-room | 23.22 | 22.72 | 23.68 | 22

@@ -1,0 +1,17 @@
+
+=> CREATE MATERIALIZED VIEW IF NOT EXISTS conditions_hourly
+CREATE MATERIALIZED VIEW
+
+=> CALL refresh_continuous_aggregate('conditions_hourly', NULL, NULL);
+CALL
+
+=> SELECT add_continuous_aggregate_policy('conditions_hourly',
+add_continuous_aggregate_policy
+1004
+
+=> CREATE MATERIALIZED VIEW IF NOT EXISTS crypto_candles_1m
+CREATE MATERIALIZED VIEW
+
+=> SELECT add_continuous_aggregate_policy('crypto_candles_1m',
+add_continuous_aggregate_policy
+1005
